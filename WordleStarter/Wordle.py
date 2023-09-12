@@ -27,6 +27,7 @@ def wordle():
             letter = gw.get_square_letter(current_row,count)
             if letter != " ":
                 letter_count += 1
+                # concatnate letters into a word
                 word += letter
             count +=1
         # Checking if user entered in 5 letters 
@@ -45,8 +46,10 @@ def wordle():
             if word in FIVE_LETTER_WORDS:
                 gw.show_message( "Good Guess!" + picked_word)
                 # check if the word matched picked word 
-                if word == picked_word:
-                     gw.show_message("Congrats! Correct word is" + picked_word)
+                if word == picked_word: 
+                    # End game and congrat user
+                    return gw.show_message("Congrats! Correct word is " + picked_word)         
+
                 # set the new row 
                 N_ROWS = gw.get_current_row()+1
                 gw.set_current_row(N_ROWS)
