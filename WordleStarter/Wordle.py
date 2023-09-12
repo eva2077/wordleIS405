@@ -11,9 +11,14 @@ from WordleDictionary import FIVE_LETTER_WORDS
 from WordleGraphics import WordleGWindow, N_COLS, N_ROWS
 
 def wordle():
-    
+    # pick the random word
+    picked_word = random.choice(FIVE_LETTER_WORDS)
     def enter_action(s):
+
+        # set letter_ count as 0 
         letter_count = 0 
+        # set var for word 
+        word = ""
         # get current row 
         current_row = gw.get_current_row()
         # count how many letters were entered 
@@ -22,6 +27,7 @@ def wordle():
             letter = gw.get_square_letter(current_row,count)
             if letter != " ":
                 letter_count += 1
+                word += letter
             count +=1
         # Checking if user entered in 5 letters 
         if letter_count < 5:
@@ -31,15 +37,32 @@ def wordle():
             gw.show_message("Please enter in 5 letters")
             # reset row to the current one 
             gw.set_current_row(N_ROWS-1)
+
         elif letter_count == 5:
-            gw.show_message("Good guess!")
+            # turn the words entered into lowercase 
+            word = word.lower()
+            # check if the word is in the dictionary
+            if word in FIVE_LETTER_WORDS:
+                gw.show_message( "Good Guess!" + picked_word)
+                # check if the word matched picked word 
+                if word == picked_word:
+                     gw.show_message("Congrats! Correct word is" + picked_word)
+                # set the new row 
+                N_ROWS = gw.get_current_row()+1
+                gw.set_current_row(N_ROWS)
+                
+            elif word not in FIVE_LETTER_WORDS:
+                gw.show_message("Not in the list")
+                # clear the words 
+                for count in range(5):
+                    gw.set_square_letter(current_row,count," ")
+                # set the row and let user try again 
+                gw.set_current_row(current_row)
+            # reset letter count to 0
             letter_count = 0 
         else:
             gw.show_message("Error!")
-        # prepare for next row
-        N_ROWS=gw.get_current_row()+1
-        # set the new row
-        gw.set_current_row(N_ROWS)
+    
 
 
     gw = WordleGWindow()
