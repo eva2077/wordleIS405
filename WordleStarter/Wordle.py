@@ -15,6 +15,10 @@ def wordle():
     picked_word = random.choice(FIVE_LETTER_WORDS)
     def enter_action(s):
 
+        CORRECT_COLOR = "#66BB66" # A shade of green
+        PRESENT_COLOR = "#CCBB66" # A shade of brownish yellow
+        MISSING_COLOR = "#999999" # A Shade of gray
+
         # set letter_ count as 0 
         letter_count = 0 
         # set var for word 
@@ -45,6 +49,20 @@ def wordle():
             # check if the word is in the dictionary
             if word in FIVE_LETTER_WORDS:
                 gw.show_message( "Good Guess!" + picked_word)
+
+                i = 0
+                for letter in word:
+                    if letter in picked_word:
+                        gw.set_square_color(current_row,i,PRESENT_COLOR)
+                    
+                    elif letter not in picked_word:
+                        gw.set_square_color(current_row,i,MISSING_COLOR)
+
+                    if letter == picked_word[i]:
+                        gw.set_square_color(current_row,i,CORRECT_COLOR)
+                    i = i + 1
+
+
                 # check if the word matched picked word 
                 if word == picked_word: 
                     # End game and congrat user
@@ -65,7 +83,16 @@ def wordle():
             letter_count = 0 
         else:
             gw.show_message("Error!")
-    
+        
+
+
+
+
+
+
+
+
+
 
 
     gw = WordleGWindow()
