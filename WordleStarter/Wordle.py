@@ -50,7 +50,10 @@ def wordle():
             word = word.lower()
             # check if the word is in the dictionary
             if word in FIVE_LETTER_WORDS:
-                gw.show_message( "Good Guess!" + picked_word)
+                if current_row <= 4:
+                    gw.show_message( "Good Guess!" + picked_word + str(current_row) )
+                elif current_row > 4:
+                    return gw.show_message("No more guesses, you lose")  
                 # change letter colors 
                 i = 0
                 for letter in word:
