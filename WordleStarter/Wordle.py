@@ -50,6 +50,7 @@ def wordle():
             word = word.lower()
             # check if the word is in the dictionary
             if word in FIVE_LETTER_WORDS:
+                # stop game once user guess more than 6 times
                 if current_row <= 4:
                     gw.show_message( "Good Guess!" + picked_word + str(current_row) )
                 elif current_row > 4:
