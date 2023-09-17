@@ -1,8 +1,10 @@
 # File: Wordle.py
 
 """
-This module is the starter file for the Wordle assignment.
-BE SURE TO UPDATE THIS COMMENT WHEN YOU WRITE THE CODE.
+Section 3 
+Developers: Eva Wu, Caleb Hefner
+Scrum Master: Brayden Paul
+Product Owner: Bronson Horne
 """
 
 import random
