@@ -49,17 +49,43 @@ def wordle():
             # check if the word is in the dictionary
             if word in FIVE_LETTER_WORDS:
                 gw.show_message( "Good Guess!" + picked_word)
-
+                # change letter colors 
                 i = 0
                 for letter in word:
+                    # create a new letter variable for keyboard letters
+                    keyboard_letter = letter
                     if letter in picked_word:
                         gw.set_square_color(current_row,i,PRESENT_COLOR)
+                        # set keyboard color                
+                        keyboard_letter = keyboard_letter.upper()
+                        # get current keyboard letter color
+                        color = gw.get_key_color(keyboard_letter)
+                        # Only change if letter has not been correct before
+                        if color != CORRECT_COLOR:
+                            gw.set_key_color(keyboard_letter,PRESENT_COLOR)
+                            
                     
                     elif letter not in picked_word:
                         gw.set_square_color(current_row,i,MISSING_COLOR)
+                        # set keyboard color
+                        keyboard_letter = keyboard_letter.upper()
+                        # get current keyboard letter color
+                        color = gw.get_key_color(keyboard_letter)
+                         # Only change if letter has not been correct before
+                        if color != CORRECT_COLOR:
+                            gw.set_key_color(keyboard_letter,MISSING_COLOR)
+                            
 
                     if letter == picked_word[i]:
                         gw.set_square_color(current_row,i,CORRECT_COLOR)
+                        # set keyboard color
+                        keyboard_letter = keyboard_letter.upper()
+                        # get current keyboard letter color
+                        color = gw.get_key_color(keyboard_letter)
+                        # Only change if letter has not been correct before
+                        if color != CORRECT_COLOR:
+                            gw.set_key_color(keyboard_letter,CORRECT_COLOR)
+                           
                     i = i + 1
 
 
