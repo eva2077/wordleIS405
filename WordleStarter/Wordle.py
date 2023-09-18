@@ -50,18 +50,37 @@ def wordle():
             if word in FIVE_LETTER_WORDS:
                 gw.show_message( "Good Guess!" + picked_word)
 
+
+                picked_word_used_positions = [False, False, False, False, False]
+                word_letter_positions = [0,1,2,3,4]
+
                 i = 0
-                for letter in word:
-                    if letter in picked_word:
-                        gw.set_square_color(current_row,i,PRESENT_COLOR)
-                    
-                    elif letter not in picked_word:
-                        gw.set_square_color(current_row,i,MISSING_COLOR)
-
+                while i < len(word):
+                    letter = word[i]
                     if letter == picked_word[i]:
-                        gw.set_square_color(current_row,i,CORRECT_COLOR)
-                    i = i + 1
+                        gw.set_square_color(current_row, i, CORRECT_COLOR)
+                        picked_word_used_positions[i] = True
+                        word_letter_positions.remove(i)
+                    else:
+                        gw.set_square_color(current_row, i, MISSING_COLOR)
+                    i += 1
 
+
+                for i in word_letter_positions:
+                    current_letter = word[i]
+                    is_in_picked_word = current_letter in picked_word
+
+                    if is_in_picked_word:
+                        index_in_picked_word = picked_word.index(current_letter)
+                        is_position_used = picked_word_used_positions[index_in_picked_word]
+
+                        if not is_position_used:
+                            gw.set_square_color(current_row, i, PRESENT_COLOR)
+                            picked_word_used_positions[index_in_picked_word] = True
+                        else:
+                            gw.set_square_color(current_row, i, MISSING_COLOR)
+                    else:
+                        gw.set_square_color(current_row, i, MISSING_COLOR)
 
                 # check if the word matched picked word 
                 if word == picked_word: 
