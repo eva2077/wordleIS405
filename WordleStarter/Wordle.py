@@ -1,8 +1,10 @@
 # File: Wordle.py
 
 """
-This module is the starter file for the Wordle assignment.
-BE SURE TO UPDATE THIS COMMENT WHEN YOU WRITE THE CODE.
+Section 3 
+Developers: Eva Wu, Caleb Hefner
+Scrum Master: Brayden Paul
+Product Owner: Bronson Horne
 """
 
 import random
@@ -50,20 +52,17 @@ def wordle():
             if word in FIVE_LETTER_WORDS:
                 gw.show_message( "Good Guess!" + picked_word)
 
-
-                picked_word_used_positions = [False, False, False, False, False]
-                word_letter_positions = [0,1,2,3,4]
-
                 i = 0
-                while i < len(word):
-                    letter = word[i]
+                for letter in word:
+                    if letter in picked_word:
+                        gw.set_square_color(current_row,i,PRESENT_COLOR)
+                    
+                    elif letter not in picked_word:
+                        gw.set_square_color(current_row,i,MISSING_COLOR)
+
                     if letter == picked_word[i]:
-                        gw.set_square_color(current_row, i, CORRECT_COLOR)
-                        picked_word_used_positions[i] = True
-                        word_letter_positions.remove(i)
-                    else:
-                        gw.set_square_color(current_row, i, MISSING_COLOR)
-                    i += 1
+                        gw.set_square_color(current_row,i,CORRECT_COLOR)
+                    i = i + 1
 
 
                 for i in word_letter_positions:
