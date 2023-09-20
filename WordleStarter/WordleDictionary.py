@@ -4,6 +4,16 @@
 This module defines the dictionary of five-letter words used in
 the Wordle project.
 """
+FIVE_LETTER_WORDS_SPANISH = [
+    "salto", "bloco", "brisa", "clavo", "credo", "cruce", "chico",
+    "dardo", "doble", "dulce", "falso", "flaco", "flota", "fruto",
+    "gafas", "gluon", "grano", "grial", "grupo", "guiar", "hacer",
+    "juego", "juicio", "labio", "largo", "libro", "lugar", "luzco",
+    "mango", "molar", "nacer", "nudar", "nuevo", "pardo", "parto",
+    "pesar", "pilar", "pulir", "quien", "ruido", "saber", "sacar",
+    "salvo", "talar", "techo", "trozo", "volar", "vulgo", "zafar",
+    "zonar",]
+
 
 FIVE_LETTER_WORDS = [
     "aahed", "aalii", "abaca", "abaci", "aback", "abaft", "abamp",

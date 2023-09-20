@@ -9,6 +9,7 @@ import atexit
 import math
 import time
 import tkinter
+from tkinter import *
 
 # Constants
 
@@ -41,6 +42,7 @@ KEY_CORNER = 9
 KEY_XSEP = 5
 KEY_YSEP = 7
 
+
 KEY_LABELS = [
     [ "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P" ],
     [ "A", "S", "D", "F", "G", "H", "J", "K", "L" ],
@@ -63,6 +65,7 @@ class WordleGWindow:
 
     def __init__(self):
         """Creates the Wordle window."""
+        self.selected_language = None
 
         def create_grid():
             return [
@@ -153,6 +156,20 @@ class WordleGWindow:
         root.title("Wordle")
         root.protocol("WM_DELETE_WINDOW", delete_window)
         self._root = root
+
+
+
+#Code for check boxes
+        # self.selected_language = 0
+        var = tkinter.IntVar()
+        c1 = tkinter.Radiobutton(root, text='English',variable=var, value=0)
+        c1.pack(anchor = W)
+        c2 = tkinter.Radiobutton(root, text='Spanish',variable=var, value=1)
+        c2.pack(anchor = W)
+        
+        self.selected_language = var.get()
+
+
         canvas = tkinter.Canvas(root,
                                 bg="White",
                                 width=CANVAS_WIDTH,
@@ -170,6 +187,9 @@ class WordleGWindow:
         self._row = 0
         self._col = 0
         atexit.register(start_event_loop)
+
+    def get_selected_language(self):
+        return self.selected_language
 
     def get_square_letter(self, row, col):
         return self._grid[row][col].get_letter()
@@ -205,7 +225,8 @@ class WordleGWindow:
     def show_message(self, msg, color="Black"):
         self._message.set_text(msg, color)
 
-
+    
+    
 class WordleSquare:
 
     def __init__(self, canvas, row, col):
