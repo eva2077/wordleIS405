@@ -67,6 +67,8 @@ class WordleGWindow:
         """Creates the Wordle window."""
         self.selected_language = None
 
+        
+
         def create_grid():
             return [
                 [
@@ -159,7 +161,7 @@ class WordleGWindow:
 
 
 
-#Code for check boxes
+        #Code for check boxes
         # self.selected_language = 0
         var = tkinter.IntVar()
         c1 = tkinter.Radiobutton(root, text='English',variable=var, value=0)
@@ -168,7 +170,7 @@ class WordleGWindow:
         c2.pack(anchor = W)
         
         self.selected_language = var.get()
-
+        
 
         canvas = tkinter.Canvas(root,
                                 bg="White",

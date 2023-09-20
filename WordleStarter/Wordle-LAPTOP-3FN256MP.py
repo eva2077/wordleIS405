@@ -1,35 +1,22 @@
 # File: Wordle.py
 
 """
-Section 3 
-Developers: Eva Wu, Caleb Hefner
-Scrum Master: Brayden Paul
-Product Owner: Bronson Horne
+This module is the starter file for the Wordle assignment.
+BE SURE TO UPDATE THIS COMMENT WHEN YOU WRITE THE CODE.
 """
 
 import random
 
-
-from WordleDictionary import FIVE_LETTER_WORDS, FIVE_LETTER_WORDS_SPANISH
+from WordleDictionary import FIVE_LETTER_WORDS
 from WordleGraphics import WordleGWindow, N_COLS, N_ROWS
 
 
+
 def wordle():
-    gw = WordleGWindow()
-    selected_language = gw.get_selected_language()
 
     # pick the random word
-    if selected_language == 0:
-        picked_word = random.choice(FIVE_LETTER_WORDS)
-        word_list = FIVE_LETTER_WORDS
-    elif selected_language == 1:
-        picked_word = random.choice(FIVE_LETTER_WORDS_SPANISH)
-        word_list = FIVE_LETTER_WORDS_SPANISH
+    picked_word = random.choice(FIVE_LETTER_WORDS)
     def enter_action(s):
-
-        CORRECT_COLOR = "#66BB66" # A shade of green
-        PRESENT_COLOR = "#CCBB66" # A shade of brownish yellow
-        MISSING_COLOR = "#999999" # A Shade of gray
 
         # set letter_ count as 0 
         letter_count = 0 
@@ -59,27 +46,8 @@ def wordle():
             # turn the words entered into lowercase 
             word = word.lower()
             # check if the word is in the dictionary
-            if word in word_list:
+            if word in FIVE_LETTER_WORDS:
                 gw.show_message( "Good Guess!" + picked_word)
-
-                picked_word_used_positions = [False, False, False, False, False]
-                word_letter_positions = [0, 1, 2, 3, 4]
-
-                i = 0
-                for letter in word:
-                    if letter == picked_word[i]:
-                        gw.set_square_color(current_row, i, CORRECT_COLOR)
-                        picked_word_used_positions[i] = True
-                        word_letter_positions.remove(i)
-                    i += 1
-
-                for i in word_letter_positions:
-                    if word[i] in picked_word and not picked_word_used_positions[picked_word.index(word[i])]:
-                        gw.set_square_color(current_row, i, PRESENT_COLOR)
-                        picked_word_used_positions[picked_word.index(word[i])] = True
-                    else:
-                        gw.set_square_color(current_row, i, MISSING_COLOR)
-
                 # check if the word matched picked word 
                 if word == picked_word: 
                     # End game and congrat user
@@ -89,7 +57,7 @@ def wordle():
                 N_ROWS = gw.get_current_row()+1
                 gw.set_current_row(N_ROWS)
                 
-            elif word not in word_list:
+            elif word not in FIVE_LETTER_WORDS:
                 gw.show_message("Not in the list")
                 # clear the words 
                 for count in range(5):
@@ -100,9 +68,10 @@ def wordle():
             letter_count = 0 
         else:
             gw.show_message("Error!")
-        
+    
 
 
+    gw = WordleGWindow()
     gw.add_enter_listener(enter_action)
 
 # Startup code
