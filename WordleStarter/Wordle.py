@@ -8,23 +8,45 @@ Product Owner: Bronson Horne
 """
 
 import random
-
-
+import tkinter
+from tkinter import *
 from WordleDictionary import FIVE_LETTER_WORDS, FIVE_LETTER_WORDS_SPANISH
 from WordleGraphics import WordleGWindow, N_COLS, N_ROWS
 
 
 def wordle():
-    gw = WordleGWindow()
-    selected_language = gw.get_selected_language()
+    picked_word = ""
+    word_list=[]
+
+    #selected_language = gw.get_selected_language()
+
+
+    def proceed_with_language_selection():
+        nonlocal picked_word, word_list
+        selected_language = var.get()
+
+        if selected_language == 0:
+            picked_word = random.choice(FIVE_LETTER_WORDS)
+            word_list = FIVE_LETTER_WORDS
+            
+        elif selected_language == 1:
+            picked_word = random.choice(FIVE_LETTER_WORDS_SPANISH)
+            word_list = FIVE_LETTER_WORDS_SPANISH
+        root.destroy()
+
+
+
+    
 
     # pick the random word
-    if selected_language == 0:
-        picked_word = random.choice(FIVE_LETTER_WORDS)
-        word_list = FIVE_LETTER_WORDS
-    elif selected_language == 1:
-        picked_word = random.choice(FIVE_LETTER_WORDS_SPANISH)
-        word_list = FIVE_LETTER_WORDS_SPANISH
+    # if selected_language == 0:
+    #     picked_word = random.choice(FIVE_LETTER_WORDS)
+    #     word_list = FIVE_LETTER_WORDS
+        
+    # elif selected_language == 1:
+    #     picked_word = random.choice(FIVE_LETTER_WORDS_SPANISH)
+    #     word_list = FIVE_LETTER_WORDS_SPANISH
+
     def enter_action(s):
 
         CORRECT_COLOR = "#66BB66" # A shade of green
@@ -101,11 +123,28 @@ def wordle():
         else:
             gw.show_message("Error!")
         
+    selected_language = None
+    root = tkinter.Tk()
+    var = tkinter.IntVar()
+    var2 = tkinter.IntVar()
+    c1 = tkinter.Radiobutton(root, text='English',variable=var, value=0)
+    c1.pack(anchor = W)
+    c2 = tkinter.Radiobutton(root, text='Spanish',variable=var, value=1)
+    c2.pack(anchor = W)
+    c3 = tkinter.Checkbutton(root, text='Color',variable=var2, onvalue=1, offvalue=2)
+    c3.pack(anchor = W)
 
+    submit_button = tkinter.Button(root, text="Submit", command=proceed_with_language_selection)
+    submit_button.pack()
 
+    root.mainloop()
+
+    gw = WordleGWindow()
     gw.add_enter_listener(enter_action)
-
+    
+    
 # Startup code
 
 if __name__ == "__main__":
     wordle()
+    

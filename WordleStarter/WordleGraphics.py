@@ -162,14 +162,15 @@ class WordleGWindow:
 
 
         #Code for check boxes
-        # self.selected_language = 0
-        var = tkinter.IntVar()
-        c1 = tkinter.Radiobutton(root, text='English',variable=var, value=0)
-        c1.pack(anchor = W)
-        c2 = tkinter.Radiobutton(root, text='Spanish',variable=var, value=1)
-        c2.pack(anchor = W)
+        # self.selected_language = None
+        # var = tkinter.IntVar()
+        # c1 = tkinter.Radiobutton(root, text='English',variable=var, value=0)
+        # c1.pack(anchor = W)
+        # c2 = tkinter.Radiobutton(root, text='Spanish',variable=var, value=1)
+        # c2.pack(anchor = W)
         
-        self.selected_language = var.get()
+        # self.selected_language = var.get()
+        # print(self.selected_language)
         
 
         canvas = tkinter.Canvas(root,
