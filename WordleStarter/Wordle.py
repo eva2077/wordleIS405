@@ -39,9 +39,20 @@ def wordle():
 
     def enter_action(s):
 
-        CORRECT_COLOR = "#66BB66" # A shade of green
-        PRESENT_COLOR = "#CCBB66" # A shade of brownish yellow
-        MISSING_COLOR = "#999999" # A Shade of gray
+        global CORRECT_COLOR, PRESENT_COLOR,MISSING_COLOR
+        new_color = var2.get()
+        if new_color == 0:
+            CORRECT_COLOR = "#66BB66" # A shade of green
+            PRESENT_COLOR = "#CCBB66" # A shade of brownish yellow
+            MISSING_COLOR = "#999999" # A Shade of gray
+        elif new_color == 1:
+            CORRECT_COLOR = "#ADD8E6" # A shade of Blue
+            PRESENT_COLOR = "#FFA500" # A shade of orange
+            MISSING_COLOR = "#999999" # A Shade of gray
+        else:
+            CORRECT_COLOR = "#66BB66" # A shade of green
+            PRESENT_COLOR = "#CCBB66" # A shade of brownish yellow
+            MISSING_COLOR = "#999999" # A Shade of gray
 
         # set letter_ count as 0 
         letter_count = 0 
