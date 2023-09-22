@@ -21,6 +21,7 @@ def wordle():
     #selected_language = gw.get_selected_language()
 
 
+
     def proceed_with_language_selection():
         nonlocal picked_word, word_list
         selected_language = var.get()
