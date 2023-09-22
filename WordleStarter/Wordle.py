@@ -11,20 +11,21 @@ import random
 import tkinter
 from tkinter import *
 from WordleDictionary import FIVE_LETTER_WORDS, FIVE_LETTER_WORDS_SPANISH
-from WordleGraphics import WordleGWindow, N_COLS, N_ROWS
+from WordleGraphics import WordleGWindow as EnglishWordleGWindow, N_COLS, N_ROWS
+from WordleGraphicsSpanish import WordleGWindow as SpanishWordleGWindow, N_COLS, N_ROWS
+
 
 
 def wordle():
     picked_word = ""
     word_list=[]
-
-    #selected_language = gw.get_selected_language()
-
-
+    selected_language = None
+        
 
     def proceed_with_language_selection():
-        nonlocal picked_word, word_list
+        nonlocal picked_word, word_list, selected_language
         selected_language = var.get()
+        LANGUAGE_VALUE = var.get()
 
         if selected_language == 0:
             picked_word = random.choice(FIVE_LETTER_WORDS)
@@ -34,19 +35,7 @@ def wordle():
             picked_word = random.choice(FIVE_LETTER_WORDS_SPANISH)
             word_list = FIVE_LETTER_WORDS_SPANISH
         root.destroy()
-
-
-
-    
-
-    # pick the random word
-    # if selected_language == 0:
-    #     picked_word = random.choice(FIVE_LETTER_WORDS)
-    #     word_list = FIVE_LETTER_WORDS
         
-    # elif selected_language == 1:
-    #     picked_word = random.choice(FIVE_LETTER_WORDS_SPANISH)
-    #     word_list = FIVE_LETTER_WORDS_SPANISH
 
     def enter_action(s):
 
@@ -134,14 +123,22 @@ def wordle():
     c2.pack(anchor = W)
     c3 = tkinter.Checkbutton(root, text='Color',variable=var2, onvalue=1, offvalue=2)
     c3.pack(anchor = W)
+    selected_language = var.get()
 
     submit_button = tkinter.Button(root, text="Submit", command=proceed_with_language_selection)
     submit_button.pack()
 
     root.mainloop()
 
-    gw = WordleGWindow()
-    gw.add_enter_listener(enter_action)
+    
+
+    if selected_language == 0:
+        gw = EnglishWordleGWindow()
+        gw.add_enter_listener(enter_action)
+        
+    elif selected_language == 1:
+        gw = SpanishWordleGWindow()
+        gw.add_enter_listener(enter_action)
     
     
 # Startup code

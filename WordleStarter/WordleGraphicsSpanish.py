@@ -43,11 +43,12 @@ KEY_CORNER = 9
 KEY_XSEP = 5
 KEY_YSEP = 7
 
-KEY_LABELS = [
+KEY_LABELS_SPANISH = [
     [ "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P" ],
-    [ "A", "S", "D", "F", "G", "H", "J", "K", "L" ],
+    [ "A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ" ],
     [ "ENTER", "Z", "X", "C", "V", "B", "N", "M", "DELETE" ]
 ]
+
 
 CLICK_MAX_DISTANCE = 2
 CLICK_MAX_DELAY = 0.5
@@ -78,16 +79,16 @@ class WordleGWindow:
 
         def create_keyboard():
             keys = { }
-            nk = len(KEY_LABELS[0])
+            nk = len(KEY_LABELS_SPANISH[0])
             h = KEY_HEIGHT
             y0 = CANVAS_HEIGHT - BOTTOM_MARGIN - 3 * KEY_HEIGHT - 2 * KEY_YSEP
-            for row in range(len(KEY_LABELS)):
+            for row in range(len(KEY_LABELS_SPANISH)):
                 y = y0 + row * (KEY_HEIGHT + KEY_YSEP)
                 x = (CANVAS_WIDTH - nk * KEY_WIDTH - (nk - 1) * KEY_XSEP) / 2
                 if row == 1:
                     x += (KEY_WIDTH + KEY_XSEP) / 2
-                for col in range(len(KEY_LABELS[row])):
-                    label = KEY_LABELS[row][col]
+                for col in range(len(KEY_LABELS_SPANISH[row])):
+                    label = KEY_LABELS_SPANISH[row][col]
                     w = KEY_WIDTH
                     if len(label) > 1:
                         w += (KEY_WIDTH + KEY_XSEP) / 2
