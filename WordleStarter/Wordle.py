@@ -90,18 +90,42 @@ def wordle():
 
                 i = 0
                 for letter in word:
-                    if letter == picked_word[i]:
-                        gw.set_square_color(current_row, i, CORRECT_COLOR)
-                        picked_word_used_positions[i] = True
-                        word_letter_positions.remove(i)
-                    i += 1
+                    # create a new letter variable for keyboard letters
+                    keyboard_letter = letter
+                    if letter in picked_word:
+                        gw.set_square_color(current_row,i,PRESENT_COLOR)
+                        # set keyboard color                
+                        keyboard_letter = keyboard_letter.upper()
+                        # get current keyboard letter color
+                        color = gw.get_key_color(keyboard_letter)
+                        # Only change if letter has not been correct before
+                        if color != CORRECT_COLOR:
+                            gw.set_key_color(keyboard_letter,PRESENT_COLOR)
+                            
+                    
+                    elif letter not in picked_word:
+                        gw.set_square_color(current_row,i,MISSING_COLOR)
+                        # set keyboard color
+                        keyboard_letter = keyboard_letter.upper()
+                        # get current keyboard letter color
+                        color = gw.get_key_color(keyboard_letter)
+                         # Only change if letter has not been correct before
+                        if color != CORRECT_COLOR:
+                            gw.set_key_color(keyboard_letter,MISSING_COLOR)
+                            
 
-                for i in word_letter_positions:
-                    if word[i] in picked_word and not picked_word_used_positions[picked_word.index(word[i])]:
-                        gw.set_square_color(current_row, i, PRESENT_COLOR)
-                        picked_word_used_positions[picked_word.index(word[i])] = True
-                    else:
-                        gw.set_square_color(current_row, i, MISSING_COLOR)
+                    if letter == picked_word[i]:
+                        gw.set_square_color(current_row,i,CORRECT_COLOR)
+                        # set keyboard color
+                        keyboard_letter = keyboard_letter.upper()
+                        # get current keyboard letter color
+                        color = gw.get_key_color(keyboard_letter)
+                        # Only change if letter has not been correct before
+                        if color != CORRECT_COLOR:
+                            gw.set_key_color(keyboard_letter,CORRECT_COLOR)
+                           
+                    i = i + 1
+
 
                 # check if the word matched picked word 
                 if word == picked_word: 
